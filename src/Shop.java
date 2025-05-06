@@ -5,6 +5,8 @@ public class Shop {
     protected Customer[] custCapacity = new Customer[5];
     protected Cart cart;
     protected Product prod;
+
+    protected Product[] productsList = new Product[5];
     private String optionMenu;
 
     public String getName() {
@@ -41,7 +43,7 @@ public class Shop {
 
     public Shop() {
         optionMenu = "";
-
+        populateProducts();
         Scanner sc = new Scanner(System.in);
 
         while(!optionMenu.equalsIgnoreCase("exit")) {
@@ -140,7 +142,8 @@ public class Shop {
                     break;
 
                 case "3" :
-                    System.out.println("This Feature will be available on the next update! :)");
+                    Product p = new Product();
+                    custShopMenu(p);
                     switch (optionMenu){
                         default:
                             System.out.print("Type");
@@ -234,6 +237,32 @@ public class Shop {
                 custCapacity[i] = null;
                 break;
             }
+        }
+    }
+
+    public void populateProducts(){
+        Product[] p = {new Product(), new Product()};
+        Product a = new Product();
+        productsList[0] = p[0];
+        productsList[1] = a;
+        productsList[2].setProdName("Shampoo");
+        productsList[3].setProdName("Meat");
+        productsList[4].setProdName("Condiments");
+        productsList[0].setStock(10);
+        productsList[1].setStock(10);
+        productsList[2].setStock(10);
+        productsList[3].setStock(10);
+        productsList[4].setStock(10);
+
+
+    }
+    public void custShopMenu(Product products){
+
+        System.out.println("Berikut List Product Yang Tersedia : ");
+
+        for(int i = 0; i<productsList.length; i++) {
+            System.out.println("Nama Produk" + productsList[i].getProdName());
+            System.out.println("Stock Produk" + productsList[i].getStock());
         }
     }
 }

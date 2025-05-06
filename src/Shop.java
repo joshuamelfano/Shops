@@ -61,24 +61,35 @@ public class Shop {
                                 String confirm = "";
                                 while(!confirm.equalsIgnoreCase("y")) {
                                     System.out.println("Input Customer Full Name : ");
-                                    Customer c = new Customer();
                                     String name = sc.next();
+                                    Customer c = new Customer();
                                     c.setName(name);
-                                    populateCust(0, new Customer());
                                     System.out.println("Customer Full Name is : " + c.getName() + " is that correct? (y/n)");
                                     confirm = sc.next();
-
-
+                                    populateCust(c);
                                 }
                                 break;
 
                             case "2" :
+                                System.out.println("View Customers List:");
+                                viewCust();
                                 break;
 
                             case "3" :
+                                String nameEdit = "";
+                                String nameTarget = "";
+                                System.out.println("Input Customer Name to Edit : ");
+                                nameTarget = sc.next();
+                                System.out.println(("Input new Customer Name : "));
+                                nameEdit = sc.next();
+                                editCust(nameTarget, nameEdit);
                                 break;
 
                             case "4" :
+                                String nameDelete = "";
+                                System.out.println("Input Customer Name to remove : ");
+                                nameDelete = sc.next();
+                                deleteCust(nameDelete);
                                 break;
 
                             case "exit" :
@@ -180,7 +191,49 @@ public class Shop {
         System.out.print("Your Input : ");
     }
 
-    public void populateCust(int i, Customer customer){
-        custCapacity[i] = customer;
+    public void populateCust(Customer customer){
+        int index = 0;
+        for(int j = 0; j<custCapacity.length; j++){
+            if(custCapacity[j]==null){
+                index = j;
+
+                break;
+            }else{
+                System.out.println(custCapacity[j].getName());
+            }
+
+        }
+
+//        System.out.println("Index null yaitu index ke :"+index);
+        custCapacity[index] = customer;
+    }
+
+    public void viewCust(){
+        for(int i=0; i<custCapacity.length; i++){
+            if(custCapacity[i]==null){
+                break;
+            }
+//            System.out.println("loop ke : "+i);
+            System.out.println(custCapacity[i].getName());
+
+        }
+    }
+
+    public void editCust(String name, String newName){
+        for(int i=0; i<custCapacity.length;i++){
+            if(custCapacity[i].getName().equalsIgnoreCase(name)){
+                custCapacity[i].setName(newName);
+                break;
+            }
+        }
+    }
+
+    public void deleteCust(String name){
+        for(int i=0; i<custCapacity.length;i++){
+            if(custCapacity[i].getName().equalsIgnoreCase(name)){
+                custCapacity[i] = null;
+                break;
+            }
+        }
     }
 }

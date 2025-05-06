@@ -6,6 +6,10 @@ public class Product {
     protected int[] stocks;
 
 
+    public Product(String prodName, int stock) {
+        this.prodName = prodName;
+        this.stock = stock;
+    }
 
     public String getProdName() {
         return prodName;

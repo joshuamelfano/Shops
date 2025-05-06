@@ -5,7 +5,6 @@ public class Shop {
     protected Customer[] custCapacity = new Customer[5];
     protected Cart cart;
     protected Product prod;
-
     protected Product[] productsList = new Product[5];
     private String optionMenu;
 
@@ -142,9 +141,29 @@ public class Shop {
                     break;
 
                 case "3" :
-                    Product p = new Product();
-                    custShopMenu(p);
+                    if(custCapacity[0] == null){
+                        System.out.println("You need to register a customer first!");
+                        sc.next();
+                        break;
+                    }
+                    custShopMenu();
+                    name = sc.next();
+                    for(int i=0; i<custCapacity.length; i++) {
+                        if (name.equalsIgnoreCase(custCapacity[i].getName())){
+                            System.out.println("Customer Found!, You will be shopping as : " + name);
+                            break;
+                        }else{
+                            System.out.println("Customer not found please type the name correctly");
+                        }
+                    }
+
+                    seeProductList();
+                    System.out.println("Your Choice : ");
+                    optionMenu = sc.next();
+
                     switch (optionMenu){
+
+
                         default:
                             System.out.print("Type");
                             optionMenu = sc.next();
@@ -217,7 +236,7 @@ public class Shop {
                 break;
             }
 //            System.out.println("loop ke : "+i);
-            System.out.println(custCapacity[i].getName());
+            System.out.println((i+1)+". "+custCapacity[i].getName());
 
         }
     }
@@ -241,28 +260,44 @@ public class Shop {
     }
 
     public void populateProducts(){
-        Product[] p = {new Product(), new Product()};
-        Product a = new Product();
-        productsList[0] = p[0];
-        productsList[1] = a;
-        productsList[2].setProdName("Shampoo");
-        productsList[3].setProdName("Meat");
-        productsList[4].setProdName("Condiments");
-        productsList[0].setStock(10);
-        productsList[1].setStock(10);
-        productsList[2].setStock(10);
-        productsList[3].setStock(10);
-        productsList[4].setStock(10);
+        Product[] p = {new Product("Apple", 10), new Product("Orange", 30), new Product("Shampoo", 5), new Product("Soap", 15), new Product("Battery", 38)};
+//        productsList[0] = p[0];
+//        productsList[1] = p[1];
+//        productsList[2] = p[2];
+//        productsList[3].setProdName("Meat");
+//        productsList[4].setProdName("Condiments");
+//        productsList[0].setStock(10);
+//        productsList[1].setStock(10);
+//        productsList[2].setStock(10);
+//        productsList[3].setStock(10);
+//        productsList[4].setStock(10);
+        for(int i = 0 ; i<productsList.length; i++){
+            productsList[i] = p[i];
+        }
 
 
     }
-    public void custShopMenu(Product products){
 
+    public void custShopMenu(){
+
+        System.out.println("Type Registered Customer Name to Shop : ");
+        viewCust();
+    }
+
+    public void seeProductList(){
         System.out.println("Berikut List Product Yang Tersedia : ");
 
         for(int i = 0; i<productsList.length; i++) {
-            System.out.println("Nama Produk" + productsList[i].getProdName());
-            System.out.println("Stock Produk" + productsList[i].getStock());
+            System.out.println("============================");
+            System.out.println("Nama Produk : " + productsList[i].getProdName());
+            System.out.println("Stock Produk : " + productsList[i].getStock());
         }
+    }
+
+    public void putIntoInventory(String productName){
+        Customer c = new Customer();
+
+        c.setInventory()[0] = "a";
+
     }
 }
